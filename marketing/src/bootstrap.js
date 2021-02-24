@@ -9,6 +9,13 @@ const mount = (el, { onNavigate }) => {
   }
 
   ReactDOM.render(<App history={history} />, el);
+
+  return {
+    onParentNavigate: (location) => {
+      if (history.location.pathname !== location.pathname)
+        history.push(location.pathname);
+    },
+  };
 };
 // render
 if (process.env.NODE_ENV === "development") {
