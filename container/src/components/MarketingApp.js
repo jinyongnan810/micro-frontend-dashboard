@@ -7,7 +7,8 @@ const MarketingApp = () => {
   useEffect(() => {
     mount(ref.current, {
       onNavigate: (location) => {
-        history.push(location.pathname);
+        if (history.pathname !== location.pathname)
+          history.push(location.pathname);
       },
     });
   }, []);
