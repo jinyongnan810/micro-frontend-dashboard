@@ -10,6 +10,7 @@ const AuthApp = () => {
         if (history.location.pathname !== location.pathname)
           history.push(location.pathname);
       },
+      initialPath: history.location.pathname,
     });
     history.listen(onParentNavigate);
   }, []);
