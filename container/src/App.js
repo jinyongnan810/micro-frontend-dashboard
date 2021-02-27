@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 // import MarketingApp from "./components/MarketingApp";
 // import AuthApp from "./components/AuthApp";
 import Progress from "./components/Progress";
@@ -13,14 +13,17 @@ const generateClassName = createGenerateClassName({
   productionPrefix: "co",
 });
 const App = () => {
+  const [signedIn, setSignedIn] = useState(false);
   return (
     <StylesProvider generateClassName={generateClassName}>
       <BrowserRouter>
         <div>
-          <Header />
+          <Header signedIn={signedIn} onSignOut={() => setSignedIn(false)} />
           <Suspense fallback={<Progress />}>
             <Switch>
-              <Route path="/auth" component={AuthLazy} />
+              <Route path="/auth">
+                <AuthLazy setSignedIn={setSignedIn} />
+              </Route>
               <Route path="/" component={MarketingLazy} />
             </Switch>
           </Suspense>
